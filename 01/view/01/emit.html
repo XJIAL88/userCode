@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>发布订阅（vue）</title>
+</head>
+<body>
+<div id="app">
+    父亲：{{money}}
+    <child></child>
+</div>
+</body>
+</html>
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script type='text/javascript'>
+    let vm = new Vue({
+        el:'#app',
+        data:{money:400},
+        components:{
+            child:{
+                template:'<div>儿子</div>'
+            }
+        }
+    });
+
+</script>

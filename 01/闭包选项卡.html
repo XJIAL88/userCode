@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>选项卡</title>
+</head>
+<style type="text/css">
+   *{
+        padding:0;
+        margin: 0;
+        list-style: none;
+    }
+
+    .clearfix:after {
+        content: "."; 
+        display: block;
+        clear: both; 
+        visibility: hidden;
+        line-height: 0; 
+        height: 0; 
+     }
+    .clearfix { 
+        display: inline-block;
+    }
+    html[xmlns] .clearfix { 
+        display: block; 
+    }
+    * html .clearfix { height: 1%; }
+    #box{
+        width: 248px;
+        margin:30px auto;
+    }
+    #box li{
+        width: 50px;
+        height:20px;
+        line-height: 20px;
+        float: left;
+        text-align:center;
+        border:1px solid #000;
+        margin:0 5px 0 0;
+        cursor:pointer;
+    }
+    #box li.active{
+        border-bottom:1px solid #fff;
+    }
+    #box p{
+        width: 246px;
+        border:1px solid #000;
+        display:none;
+        margin-top:-12px;
+        line-height: 150px;
+        text-align: center;
+    }
+    #box p.active{
+        display:block;
+    }
+</style>
+<body>
+    <div id="box">
+        <ul class="clearfix">
+            <li class="activ">读书</li>
+            <li>电影</li>
+            <li>音乐</li>
+            <li>娱乐</li>
+        </ul>
+        <p class="active">读书01</p>
+        <p>电影02</p>
+        <p>音乐03</p>
+        <p>娱乐04</p>
+    </div>
+
+</body>
+</html>
+<script src="demo.js"></script>   

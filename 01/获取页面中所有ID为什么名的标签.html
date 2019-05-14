@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+</head>
+<body>
+
+    <input type="" name="hobby">
+    <input type="" name="hobby">
+    <input type="" name="hobby">
+    <input type="" name="hobby">
+    <input type="" name="hobby">
+
+
+    <div name='hobby' id = 'a'></div>
+    <div name='hobby' id = 'a'></div>
+    <div name='hobby' id = 'a'></div>
+    <div name='hobby' id = 'a'></div>
+
+</body>
+</html>
+<script type="text/javascript">
+
+    console.log(document.getElementsByName('hobby')[0].className = 'Area');
+    console.log(document.getElementsByName('hobby')[0].className);
+
+
+    function queryAllById(id){
+    //基于通配符'*'获取到整个文档中所有HTML标签
+    var nodeList = document.getElementsByTagName('*');
+
+    //遍历集合中的每一项，把元素ID和传递ID相同的这一项存储起来
+    var ary = [];
+    for(var i = 0; i < nodeList.length; i++){
+        var item = nodeList[i];
+        if(item.id === id ){
+            ary.push(item);
+        }
+    }
+    return ary;
+    }
+    console.log(queryAllById('a'));
+
+</script>

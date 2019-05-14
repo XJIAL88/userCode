@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <parent> </parent>
+</div>
+</body>
+</html>
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script type=text/javascript>
+    //=>嵌套组件中 使用自己的数据data
+    let sone ={
+        template:'<h3>{{a}}</h3>',
+        data(){
+            return{
+                a:'数据使用自己组件中的data'
+            }
+        }
+    };
+
+    let parent ={
+        template:'<h1> parent<sone></sone></h1>',
+        components: {
+            sone
+        }
+    };
+
+    const vm = new Vue({
+        el: '#app',
+        components:{
+            parent
+        }
+    });
+</script>

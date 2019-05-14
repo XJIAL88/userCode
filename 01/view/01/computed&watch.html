@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>conputed</title>
+</head>
+
+<body>
+    <div id="app">
+        <input type="text" v-model='val'>{{msg}}
+    </div>
+</body>
+
+</html>
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script>
+    let vm = new Vue({
+        el: "#app",
+        computed: {
+            msg() {
+                // let str = ``;
+                // str = `${this.firstName} ${this.val} ${this.lastName}`
+                return this.firstName + this.val + this.lastName;
+            }
+        },
+        data: {
+            firstName: 'hello',
+            lastName: 'world',
+            val: ''
+        }
+    })
+
+    // let vm = new Vue({
+    //     el: "#app",
+    //     watch: {
+    //         val(newVal) {
+    //             this.msg = this.firstName + newVal + this.lastName;
+    //         }
+    //     },
+    //     data: {
+    //         firstName: 'hello',
+    //         lastName: 'world',
+    //         val: '',
+    //         msg: ''
+    //     }
+    // })
+</script>

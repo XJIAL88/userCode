@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>路由映射</title>
+</head>
+<body>
+<div id="app">
+    <router-link to='/home'>首页</router-link>
+    <router-link to='/list'>列表</router-link>
+    <router-view></router-view>
+</div>
+</body>
+</html>
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script src="../node_modules/vue-router/dist/vue-router.js"></script>
+<script type='text/javascript'>
+    let home = {template:"<div>首页</div>"},
+        list = {template:"<div>列表</div>"}
+
+    let routes = [
+        {path:'/',component:home},//=>首次打开，默认路径是/
+        {path:'/home',component:home},
+        {path:'/list',component:list},
+        {path:'/*',redirect:'/home'} //=>从上到下依次匹配，都没有匹配到访问最后一个，*放在最后，让其重定向（redirect）
+    ];
+
+    let router = new VueRouter({
+        routes
+    });
+
+    let vm = new Vue({
+        el:'#app',
+        data:{},
+        router
+    });
+</script>

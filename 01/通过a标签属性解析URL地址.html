@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+<script type="text/javascript">
+
+    /*
+    思路：
+    1.创建一个A标签，把需要解析的地址当做A标签的href赋值
+    2.A元素对象的hash / search 两个属性分别存储了哈希值和参数值
+    3.分别解析出hash和参数即可
+    */
+    var str = 'http://www.zhufengpeixun.cn/stu/?lx=1&name=AA&sex=man#teacher';
+    function analysisURL(str){
+    var obj={};
+    var link = document.createElement('a');
+        link.href = str;
+
+    var search = link.search.slice(1),
+        hash = link.hash.slice(1);
+
+        //判断hash值有没，有的话将值保存在obj对象中；
+        hash?obj['HASH'] = hash:null;
+
+        //判断search值有没有，有的话将进行下一步操作
+        if(search){
+            search = search.split('&');
+            for(var i = 0;i<search.length;i++){
+                var item = search[i].split('=');
+                obj[item[0]] = item[1];
+            }
+        }
+        return obj;
+    }
+
+    console.log(analysisURL(str));
+</script>

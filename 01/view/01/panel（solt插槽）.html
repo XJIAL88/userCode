@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+    <title>Document</title>
+</head>
+<body>
+<div id="app" class='container'>
+    <panel type="primary">
+        <div slot="title">这是一篇文章</div>
+        <div slot="content">内容区
+            <p>组件传递性</p>
+            <p>slot用法</p>
+            <p>ref使用</p>
+            <p>nextTick的使用</p>
+        </div>
+        <div>作者:xxxx</div>
+    </panel>
+</div>
+<template id='panel'>
+    <div class="panel" :class="[color]">
+        <div class="panel-heading">
+            <slot name="title"></slot>
+        </div>
+        <div class="panel-body">
+            <slot name="content"></slot>
+        </div>
+        <div class="panel-footer">
+            <slot></slot>
+        </div>
+    </div>
+</template>
+</body>
+</html>
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script type='text/javascript'>
+    const panel = {
+        template: '#panel',
+        computed: {
+            color() {
+                return 'panel-' + this.type;
+            }
+        },
+        props: {
+            type: { //=>子不能更改父组件传递的属性
+                type: String, //=>数据类型
+                default: 'default'
+            }
+        }
+    };
+    const vm = new Vue({
+        el: '#app',
+        components: {panel},
+    });
+</script>

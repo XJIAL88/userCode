@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+</html>
+<script type='text/javascript'>
+    // =>async 把普通对象变为promise对象
+    let f = async function fn() {
+        throw new Error('sorry');
+        return 1;
+    };
+
+    f().then((res) => {
+        console.log(res);
+    }).catch(rej => {
+        console.log(rej);
+    });
+
+    //=>await 语法糖（将复杂的语法变成简单的表示）
+    let ff = async function fn1() {
+        let a = await  new Promise((resolve,reject)=>{
+            resolve(100);
+        });
+        console.log(a); //=>await 可以直接拿到结果
+    };
+    ff();
+
+
+    //=>正常获取Promise中resolve中的结果或者reject的结果
+    new Promise((resovle,reject)=>{
+        reject(10000);
+    }).then(result=>{
+        return Promise.resolve('dddd');
+    }).then(res=>{
+       console.log(res);
+    });
+
+
+</script>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 动态绑定样式 -->
+        <div style="font-size: 30px" :style="{backgroundColor:'red',color:'pink'}">你好</div>
+        <div :style="[sty1,sty2,{fontSize: '30px'}]">非常好</div>
+    </div>
+</body>
+
+</html>
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script>
+    //class="abc" style='background:color'
+    //=>常用绑定方法：第一种方式是对象 第二种方式是数组
+    let vm = new Vue({
+        el: '#app',
+        data: {
+            flag: true,
+            sty1: {
+                background: 'red'
+            },
+            sty2: {
+                color: 'pink'
+            }
+        }
+    });
+</script>

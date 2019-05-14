@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="cn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>Document</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+</head>
+<style>
+    body {
+        background: #f0f0f0;
+    }
+    
+    #box {
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto;
+        width: 100px;
+        height: 100px;
+        position: absolute;
+        background: #ccc;
+    }
+</style>
+
+<body>
+    <div id="box"></div>
+</body>
+
+</html>
+<script>
+    let box = document.getElementById('box');
+    box.addEventListener('touchstart', function(e) {
+        let point = e.changedTouches[0]
+        console.dir(e);
+        /**
+         * TouchEvent:手指对象
+         * changedTouches
+         * touches
+         * 手指操作的信息集合，集合中记录了每一根操作的手指相关信息（包含出发点的坐标位置），
+         * touches记录的信息只有手指在屏幕上才有，也就是手指离开屏幕的时候信息就消失了，
+         * changedTouches本意上记录的是改变的值，即使手指离开，信息值也在。
+         **/
+
+    });
+
+    box.ontouchstart = function(e) {
+        //=>按下的时候记录手指的起始位置
+        let point = e.changedTouches[0];
+        //=>添加到自定义属性上
+        this.strX = point.clientX;
+        this.strY = point.clientY;
+        this.isMove = false;
+    }
+
+    box.ontouchmove = function(e) {
+        let point = e.changedTouches[0];
+        this.changeX = point.clientX - this.strX;
+        this.changeY = point.clientY - this.strY;
+
+        //=>10 是操作误差
+        Math.abs(changeX) > 10 || Math.abs(changeX) > 10 ? this.isMove = true : null;
+    }
+
+    box.ontouchend = function(e) {
+        if (this.isMove) {
+            //=>滑动处理事
+        }
+        //=>处理点击事
+        console.log('我是点击')
+    }
+
+    let tap = function tap(elem, callback) {
+        elem.ontouchstart = function(e) {
+            //=>按下的时候记录手指的起始位置
+            let point = e.changedTouches[0];
+            //=>添加到自定义属性上
+            this.strX = point.clientX;
+            this.strY = point.clientY;
+            this.isMove = false;
+        }
+
+        elem.ontouchmove = function(e) {
+            let point = e.changedTouches[0];
+            this.changeX = point.clientX - this.strX;
+            this.changeY = point.clientY - this.strY;
+
+            //=>10 是操作误差
+            Math.abs(changeX) > 10 || Math.abs(changeX) > 10 ? this.isMove = true : null;
+        }
+
+        elem.ontouchend = function(e) {
+            if (this.isMove) {
+                //=>滑动处理事
+            }
+            //=>处理点击事
+            callback && callback();
+        }
+    }
+
+    tap(box, function() {
+        console.log('点击')
+    });
+</script>

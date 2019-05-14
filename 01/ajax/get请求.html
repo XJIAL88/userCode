@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+    // https://www.easy-mock.com/mock/5b0412beda8a195fb0978627/temp/list
+    let xhr = new XMLHttpRequest;
+    xhr.open('GET', '../SHOP/json/product.json');
+    //设置请求头
+    xhr.setRequestHeader('xingming', '@@@'); //=>设置的请求头不能出现中文，而且必须在open之后才可以
+    //=>当前请求被中断
+    xhr.onabort = function() {
+        console.log('当前请求已经被中断');
+    }
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 2) {
+            //响应头信息已经回来了
+            let time = xhr.getResponseHeader('date'); //=>获取的结果是格林尼治时间，而且是字符串
+            console.log(typeof time); //=>string
+            //=>new Date(); 获取当前客户端的时间
+            //=>new Date(时间字符串) 把指定的时间字符串格式化为标准的背景时间（不在是字符串，而是DATE类的实例，也是标准的时间格式数据）
+            console.log(new Date(time));
+        }
+
+        if (!/^(2|3)\d{2}/.test(status)) return;
+        productData = JSON.parse(xhr.responseText);
+        // if (xhr.readyState === 4 && xhr.status === 200) {
+        //     productData = JSON.parse(xhr.responseText);
+        // }
+    };
+    xhr.send(null);
+
+    setTimeout(() => {
+        xhr.abort();
+    }, 100);
+</script>

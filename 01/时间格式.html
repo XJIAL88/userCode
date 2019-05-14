@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <link rel="stylesheet" href="">
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script type="text/javascript">
+    var str = '2019-3-13 10:50:33';
+    var num = str.split(' ');
+    var left = num[0].split('-');
+    var right = num[1].split(':');
+    var ary = left.concat(c);
+    var month = null,
+        day = null,
+        hour = null,
+        minute = null,
+        result = null;
+
+    function fn(val) {
+        return parseInt(val) < 10 ? '0' + val : void 0;
+    }
+
+    for (var i = 0; i < ary.length; i++) {
+        var cur = ary[i];
+        if (i !== 0) {
+            switch (i) {
+                case 1:
+                    month = cur
+                    break;
+                case 2:
+                    day = cur
+                    break;
+                case 3:
+                    hour = cur;
+                    break;
+                case 4:
+                    minute = cur
+                    break;
+                case 5:
+                    result = cur;
+                    break;
+            }
+        }
+    }
+    var time = month + '月' + day + '日' + " " + hour + '时' + minute + '分' + result + '秒';
+    console.log(time);
+
+    // 方法一
+    /*var str = '2019-3-13 10:50:33';
+    var a = str.split(' ');
+    var b = a[0].split('-');
+    var c = a[1].split(':');
+    var ary = b.concat(c);
+    var month = fn(ary[1]), day = fn(ary[2]), hour = fn(ary[3]), minute = (ary[4]), result = fn(ary[5]);
+    function fn(val){
+        return parseInt(val)<10?'0'+val :void 0;
+    }
+
+    var time = month + '月' + day + '日' + " " + hour + '时' + minute + '分' + result + '秒';
+    console.log(time);
+    */
+
+    /*方法二：
+
+    ~function(pro){
+        pro.formatTime = function(template){
+            template = template || '{0}年{1}月{2}日 {3}时{4}分{5}秒';
+            var ary = this.match(/\d+/g);
+            template = template.replace(/\{(\d+)\}/g,function(){
+                var n  = arguments[1],
+                    val =  ary[n] || '0';
+                val < 10? val = '0' + val : void 0;
+                return val;
+            });
+            return template;
+        }
+    }(String.prototype)*/
+</script>

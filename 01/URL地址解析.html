@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <link rel="stylesheet" href="">
+</head>
+
+<body>
+</body>
+
+</html>
+<script type="text/javascript">
+/*
+    思路：
+    1.先找到问号，把问号后面的信息截取下来即可
+    2.首先我们需要验证是否存在#哈希值，存在我们从问号开始截取到#，不存在我们直接截取到字符串末尾。
+    3.以&进行拆分（数组）
+    4.遍历数组中的每一项，把每一项在按照=进行拆分，把拆分后的第一项作为对象的属性名，第二项作为属性值进行存储即可
+ */
+var str = 'http://www.zhufengpeixun.cn/stu/?lx=1&name=AA&sex=man#teacher';
+var indexASK = str.indexOf('?'),
+    indexWell = str.indexOf('#');
+
+if (indexWell > -1) {
+    str = str.slice(indexASK + 1, indexWell);
+} else {
+    str = str.slice(indexASK + 1);
+}
+
+var ary = str.split('&');
+var obj = {};
+for (var i = 0; i < ary.length; i++) {
+    var item = ary[i],
+        data = item.split("=");
+    obj[data[0]] = data[1];
+}
+console.log(obj);
+</script>

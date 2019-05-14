@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <!-- v-if v-show if操作的是dom show操作的是样式-->
+        <!-- 如果频繁的切换dom使用v-show，当数据一开始是就确定下来，v-if更好，如果if不通过，内部指令不会在执行 -->
+        <!-- 只有dom从显示到隐藏或者隐藏到显示才可以使用vue的动画 -->
+        <!-- transition vue自定义标签（组件） -->
+        <button @click='flag=!flag'>切换</button>
+        <!-- 进入激活时样式：enter-active-class 离开时激活样式：leave-active-class -->
+        <input type="text" v-model='query'>
+        <transition-group enter-active-class="animated bounceIn" leave-active-class="animated bounceOutRight">
+            <div v-for="a in newArr" :key='Math.random()'>{{a}}</div>
+        </transition-group>
+    </div>
+</body>
+
+</html>
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script>
+    let vm = new Vue({
+        el: "#app",
+        computed: {
+            newArr() {
+                return this.arr.filter(item => item == this.query);
+            }
+        },
+        data: {
+            flag: true,
+            arr: [1, 2, 3, 4, 5],
+            query: ''
+        }
+    })
+</script>

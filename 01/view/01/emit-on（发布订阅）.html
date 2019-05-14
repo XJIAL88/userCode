@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+</body>
+</html>
+<script type='text/javascript'>
+//=>发布 emit 订阅 on
+//=>数据格式:{name:[callback,callback,...]}
+class Girl {
+    constructor() {
+        this.obj = {};
+    };
+
+    on(name,callback) {
+        if(!this.obj[name]){
+            this.obj[name] = [callback];
+            return;
+        }
+        this.obj[name].push(callback);
+    };
+
+    emit(name,...args) {
+        this.obj[name].forEach(item=>{
+           item(...args);
+        });
+    }
+}
+
+let girl = new Girl();
+//=>订阅要做的事
+girl.on('减肥', function (who) {
+    console.log(who+'忌口');
+});
+girl.on('减肥', function (who) {
+    console.log(who+'运动');
+});
+
+girl.emit('减肥','我') //=>执行之前定好要做的事
+</script>

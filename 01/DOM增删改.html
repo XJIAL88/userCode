@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>DOM增删改</title>
+</head>
+
+<body>
+    <div id="box"></div>
+</body>
+
+</html>
+<script type="text/javascript">
+    var newP = document.createElement('p'),
+        newA = document.createElement('a');
+
+    newP.innerText = '我是p标签插入进来的'
+    newA.innerText = '我是a标签插入进来的'
+
+    box.appendChild(newP);
+    document.body.insertBefore(newA, box);
+
+    //把创建的A克隆一份放到body末尾
+    var cloneA = newA.cloneNode(true);
+    document.body.appendChild(cloneA);
+
+    //干掉p标签
+    box.removeChild(newP);
+</script>

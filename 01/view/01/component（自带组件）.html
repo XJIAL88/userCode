@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body>
+    <!--自带组件 template slot transition -->
+    <div id="app">
+        <input type="radio" v-model="radio" value="home">
+        <input type="radio" v-model="radio" value="list">
+        <!-- 一般用作缓存：为的是后面的路由做准备，如果缓存了不会再走created mounted 钩子函数了-->
+        <keep-alive>
+            <component :is="radio"></component>
+        </keep-alive>
+    </div>
+</body>
+
+</html>
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script type="text/javascript">
+    let home = {
+        template: "<div>home</div>",
+        mounted() {
+            alert("挂载");
+        },
+        beforeDestroy() {
+            alert('销毁')
+        }
+    };
+    let list = {
+        template: "<div>list</div>",
+        mounted() {
+            alert("挂载");
+        },
+        beforeDestroy() {
+            alert('销毁')
+        }
+    };
+    let vm = new Vue({
+        el: "#app",
+        data: {
+            radio: 'home',
+        },
+        components: {
+            home,
+            list
+        }
+    });
+</script>

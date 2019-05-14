@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <link rel="stylesheet" href="">
+</head>
+<body>
+<!-- 注释节点 -->
+<ul >
+    <li>元素节点（HTML标签）</li>
+    <li id = 'box'>文本节点（文字内容） </li>
+    <li>注释节点（注释内容） </li>
+    <li>文档节点（docunemt）</li>
+</ul>
+<div class="name"></div>
+
+</body>
+</html>
+<script type="text/javascript">
+
+/*
+思路：先找当前元素的哥哥节点，看是否为元素节点，不是的话基于哥哥找哥哥的上一个哥哥节点，
+一直找到元素节点，或者已经没有哥哥了（说明我就是老大）则结束查找
+*/
+
+function previouNode(ele){
+var previoubrother = ele.previousSibling;
+//验证是否还没有，如果没有则为null；
+//revioubrother.nodeType 是验证是否找到元素
+    while(previoubrother && previoubrother.nodeType!==1){
+        //如果没找到则将previoubrother.previousSibling 获取的值赋值给 previoubrother 为下次循环做准备
+        previoubrother = previoubrother.previousSibling;
+    };
+
+return previoubrother;
+}
+console.log(previouNode(box));
+
+</script>

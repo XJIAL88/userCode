@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+<div id="app">
+<!--单选：v-model中是一个值 存放的时候选中的option的value值，没有value就是option中内容-->
+    <select v-model="sel">
+        <option>广州</option>
+        <option>深圳</option>
+        <option>佛山</option>
+    </select>
+    {{sel}}
+<!--加上属性multiple 可以多选，v-model数据变成了一个数组，数组中村存放是选中所有option里面 value属性中的值，没有value则是option的内容-->
+    <select v-model="sel" multiple>
+        <option>广州</option>
+        <option>深圳</option>
+        <option>佛山</option>
+    </select>
+
+</div>
+</body>
+</html>
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script type='text/javascript'>
+    const vm = new Vue({
+        el: '#app',
+        data: {
+            sel: ''
+        }
+    });
+</script>

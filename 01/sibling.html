@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="charset">
+
+<head>
+    <meta charset="UTF-8">
+    <title>sibling</title>
+</head>
+
+<body>
+    <ul>
+        <li>所有兄弟</li>
+        <li>所有兄弟</li>
+        <li>所有兄弟</li>
+        <li>所有兄弟</li>
+        <li>所有兄弟</li>
+        <!-- 所有兄弟 -->
+        <li id="box">所有兄弟</li>
+        <!-- 所有兄弟 -->
+        <li>所有兄弟</li>
+        <li>所有兄弟</li>
+        <li>所有兄弟</li>
+        <li>所有兄弟</li>
+    </ul>
+</body>
+
+</html>
+
+<script>
+    function prevAll(ele) {
+        var link = ele.parentNode.childNodes, ary = [];
+        for (var i = 0; i < link.length; i++) {
+            var item = link[i];
+            item.nodeType === 1 ? ary.push(item) : null;
+        }
+        return ary;
+    }
+    console.log(prevAll(box));
+</script>

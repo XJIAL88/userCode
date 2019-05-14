@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh=CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+    <title>Document</title>
+</head>
+<!-- Vue的ui框架：iview，mintui，elementui -->
+
+<body>
+    <div id="app" style="margin-top:20px">
+        <div class="container">
+            <div class="row">
+                <p class="h4 text-center">购物车</p>
+                <table class="table table-hover table-striped">
+                    <tr>
+                        <th>全选 <input type="checkbox" v-model='checkAll' @change='chage'> </th>
+                        <th>商品</th>
+                        <th>单价</th>
+                        <th>数量</th>
+                        <th>小计</th>
+                        <th>操作</th>
+                    </tr>
+                    <tr v-for='(product,index) in products'>
+                        <td><input type="checkbox" v-model='product.isSelected' @change='chageOne'></td>
+                        <!-- ':' 和 v-bind等价 指令动态绑定数据（一般用在行间属性上） -->
+                        <td><img :src="product.productCover" :title="product.productName" style="width:50px">{{product.productInfo}}</td>
+                        <td>{{product.productPrice}}</td>
+                        <!-- .number是让输入框的值变为数字类型，.lazy当输入框失去焦点是更新数据 -->
+                        <td><input type="number" v-model.number='product.productCount' style="width:50px"></td>
+                        <!-- 过滤器 原数据不变的情况，只是改变显示的效果 -->
+                        <td>￥{{product.productPrice*product.productCount | toFixed(2)}}</td>
+                        <td><button class="btn btn-danger" @click='remove(product);'>删除</button></td>
+                    </tr>
+                    <tr>
+                        <td colspan='12'>合计：￥{{sum()|toFixed(2)}}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script src="../node_modules/axios/dist/axios.min.js"></script>
+<script>
+    let vm = new Vue({
+        el: '#app',
+        filters: { //=>可以有很多自定义过滤器
+            toFixed(a, b) {
+                //=>两个形参：形参1：代表使用该方法花括号取值 | 参数2：调用方法传过来的实参
+                return a.toFixed(b);
+            }
+        },
+        methods: {
+            sum() {
+
+                return this.products.reduce((a, b) => {
+                    if (!b.isSelected) return a;
+                    return a + b.productPrice * b.productCount;
+                }, 0);
+
+            },
+            //=>初始化数据方法
+            getData() {
+                axios.get('./carts.json').then(resolve => {
+                    this.products = resolve.data;
+                    this.chageOne();
+                });
+            },
+            remove(p) { //=>形参代表当前点击的这一项引用类型地址
+                this.products = this.products.filter(item => item !== p);
+            },
+            chage() {
+                this.products.forEach(item => item.isSelected = this.checkAll);
+            },
+            chageOne() {
+                this.products.every(item => this.checkAll = item.isSelected);
+            }
+        },
+        created() { //=>在数据被初始化的时候会被调用，this指向vm实例，钩子函数
+            this.getData();
+        },
+        data: {
+            products: '',
+            checkAll: false
+        }
+    })
+</script>

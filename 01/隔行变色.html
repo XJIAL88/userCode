@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+    </title>
+</head>
+<style media="screen" type="text/css">
+    * {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    #box {
+        width: 100px;
+        margin: 100px auto;
+    }
+
+    #box li {
+        line-height: 35px;
+        width: 80px;
+
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: normal;
+
+    }
+
+    .bgcolor {
+        background: #ccc;
+    }
+
+    .bgPink {
+        background: pink;
+    }
+
+    .bgBule {
+        background: blue;
+    }
+
+    .bgRed {
+        background: red;
+    }
+
+    .bg0 {
+        background: lightpink;
+    }
+
+    .bg1 {
+        background: lightcyan;
+    }
+
+    .bg2 {
+        background: lightblue;
+    }
+
+    .hover {
+        background: #ccc;
+
+    }
+</style>
+
+<body>
+    <ul id="box">
+        <li>隔三行变色</li>
+        <li>隔三行变色</li>
+        <li>隔三行变色</li>
+        <li>隔三行变色</li>
+        <li>隔三行变色</li>
+        <li>隔三行变色</li>
+        <li>隔三行变色</li>
+        <li>隔三行变色</li>
+        <li>隔三行变色</li>
+        <li>隔三行变色</li>
+        <li>隔三行变色</li>
+        <li>隔三行变色</li>
+    </ul>
+</body>
+
+</html>
+<script type="text/javascript">
+    var oBox = document.getElementById("box");
+    var oLis = oBox.getElementsByTagName('li');
+
+    /*方法一：
+    for(var i = 0;i<oLis.length;i++){
+        var num = i%3;
+        switch (num){
+            case 0:
+                oLis[i].style.backgroundColor = 'red';
+                break;
+    
+            case 1:
+                oLis[i].style.backgroundColor = 'yellow';
+                break;
+            case 2:
+                oLis[i].style.backgroundColor = 'blue';
+            default:
+                null;
+    
+        }
+    }
+    
+    方法二：
+    var bgcolor=['bgPink','bgBule','bgRed'];
+    for(var i= 0;i<oLis.length;i++){
+        oLis[i]['className'] = bgcolor[i%3];
+    }*/
+
+    // 方法三：
+    // for(var i=0;i<oLis.length;i++)oLis[i]['className'] = 'bg' + (i%3);  //for循环只有一行代码可以不加'{}'
+
+    /*方法四：
+    function changeColor(){
+        for(var i = 0;i<oLis.length;i++){
+            i%3===0?oLis[i].style.backgroundColor = 'red':(i%3===1?oLis[i].style.backgroundColor = 'blue':(i%3===2?oLis[i].style.backgroundColor = 'pink':null));
+        }
+    }
+    changeColor();
+    
+    方法五：
+    var max = oLis.length - 1;
+    for(var i = 0; i < oLis.length;i+=3){
+        oLis[i].style.backgroundColor = 'lightblue';
+        i+1<=max?oLis[i+1].style.backgroundColor = 'lightcyan':null;
+        i+2<=max?oLis[i+2].style.backgroundColor = 'lightpink':null;
+    } */
+
+    //=================
+    //鼠标滑过效果
+    for (var i = 0; i < oLis.length; i++) {
+        oLis[i]['className'] = 'bg' + (i % 3);
+        oLis[i].onmouseover = function () {
+            this.className += ' hover';
+        }
+        oLis[i].onmouseout = function () {
+            this.className = this.className.replace(' hover', '')
+        }
+    }
+</script>

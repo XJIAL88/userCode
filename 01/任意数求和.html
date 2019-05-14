@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>任意数求和</title>
+    <link rel="stylesheet" href="">
+</head>
+<body>
+
+</body>
+</html>
+<script type="text/javascript">
+
+/*function sum(){
+var ary = [];
+for(var i =0;i<arguments.length;i++){
+    var item = arguments[i];
+    if(isNaN(item)){
+        continue; //不是有效数字，结束本轮循环继续下一轮循环
+    }
+    ary.push(arguments[i]);
+}
+ary = eval(ary.join('+'));
+return ary;
+console.log(sum('nihoa',344,'33'));
+}*/
+
+
+function sum (){
+    var total = null;
+    for(var i = 0; i < arguments.length; i++){
+        var item = arguments[i];
+        if(isNaN(item)){
+            continue;
+        }
+        total += parseFloat(item);
+    }
+    return total;
+}
+console.log(sum('nihoa',344,'33'));
+
+
+
+</script>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ch">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name = 'viewport' content = "width=device-width,initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+
+</style>
+
+<body>
+    <ul>
+        <li>当前元素上面所有哥哥</li>
+        <li>当前元素上面所有哥哥</li>
+        <li>当前元素上面所有哥哥</li>
+        <li>当前元素上面所有哥哥</li>
+        <li>当前元素上面所有哥哥</li>
+        <!-- 当前元素上面所有哥哥 -->
+        <li id="box">当前元素上面所有哥哥</li>
+        <!-- 当前元素上面所有哥哥 -->
+        <li>当前元素上面所有哥哥</li>
+        <li>当前元素上面所有哥哥</li>
+        <li>当前元素上面所有哥哥</li>
+        <li>当前元素上面所有哥哥</li>
+    </ul>
+
+
+</body>
+
+</html>
+<script>
+    function prevAll(ele) {
+        var link = ele.previousSibling,
+            ary = [];
+        while (link) {
+            link.nodeType === 1 ? ary.push(link) : null;
+            link = link.previousSibling;
+        }
+        return ary;
+    }
+    console.log(prevAll(box));
+</script>

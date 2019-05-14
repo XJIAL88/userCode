@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ch">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        #box {
+            width: 200px;
+            height: 200px;
+            background: #000;
+            position: relative;
+            top: 0;
+            left: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box"></div>
+</body>
+
+</html>
+<script src="js/utils.js"></script>
+<script src="../jquery.min.js"></script>
+<script>
+    let target = document.documentElement.clientWidth - box.clientWidth,
+        begin = 0, //起始位置
+        change = target - begin, //总距离
+        time = 0, //当前运动时间
+        duration = 1000;
+
+    let timer = setInterval(function() {
+        time += 17;
+        if (time >= duration) {
+            clearInterval(timer);
+        }
+        let curL = time / duration * change + begin;
+        utils.css(box, {
+            left: curL + 'px'
+        });
+    }, 17);
+
+
+    // let target = document.documentElement.clientWidth - box.clientWidth,
+    //     stop = 10;
+
+    // let timer = setInterval(function() {
+    //     let curL = utils.css(box, 'left');
+    //     curL += stop;
+
+    //     if (curL >= target) {
+    //         clearInterval(timer);
+    //         utils.css(box, 'left', curL);
+    //         return;
+    //     }
+    //     utils.css(box, {
+    //         left: curL + 'px'
+    //     });
+    // }, 17);
+</script>

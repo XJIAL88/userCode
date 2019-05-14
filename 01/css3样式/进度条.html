@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="cn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<style>
+    body {
+        background: #ccc;
+    }
+    
+    .content {
+        width: 200px;
+        height: 30px;
+        background: #fff;
+        border-radius: 50px;
+        margin: 50px auto;
+    }
+    
+    .run {
+        width: 0%;
+        height: 100%;
+        background: -webkit-linear-gradient(left bottom, #5cB85c 0%, #5cB85c 25%, #74c274 25%, #74c274 50%, #5cB85c 50%, #5cB85c 75%, #74c274 75%, #74c274 100%) 0 0;
+        background-size: 30px 30px;
+        /* 调用 */
+        animation: loadingMove .3s linear 0s infinite both;
+        border-radius: 50px;
+    }
+    /* 设置动画 */
+    
+    @keyframes loadingMove {
+        0% {
+            background-position: 0 0;
+        }
+        100% {
+            background-position: 0 -30px;
+        }
+    }
+</style>
+
+<body>
+    <div class="content">
+        <div class="run"></div> <span id="numb"></span>
+    </div>
+
+</body>
+
+</html>
+<script>
+    let num = 0;
+    let run = document.querySelector('.run');
+    let timer = setInterval(() => {
+        num++;
+        run.style.width = num + '%';
+        numb.innerHTML = num + '%';
+        if (num === 100) {
+            clearInterval(timer);
+        }
+    }, 50);
+
+    //获取哈希值
+    (function() {
+        let location = window.location.href,
+            well = location.indexOf('#'),
+            hash = location.substring(well + 1);
+        console.log(hash);
+    })()
+</script>

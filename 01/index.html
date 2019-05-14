@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="charset">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+    <ul>
+        <li>获取下一个弟弟</li>
+        <li>获取下一个弟弟</li>
+        <li>获取下一个弟弟</li>
+        <li>获取下一个弟弟</li>
+        <li>获取下一个弟弟</li>
+        <!-- 获取下一个弟弟 -->
+        <li id="box">获取下一个弟弟</li>
+        <!-- 获取下一个弟弟 -->
+        <li>获取下一个弟弟</li>
+        <li>获取下一个弟弟</li>
+        <li>获取下一个弟弟</li>
+        <li>获取下一个弟弟</li>
+    </ul>
+</body>
+
+</html>
+<script>
+    function index(ele) {
+        var link = ele.previousSibling,
+            ary = [];
+        while (link) {
+            link.nodeType === 1 ? ary.push(link) : void 0;
+            link = link.previousSibling;
+        }
+        return ary.length;
+    }
+    console.log(index(box));
+</script>

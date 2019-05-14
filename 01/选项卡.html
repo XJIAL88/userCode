@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>选项卡</title>
+</head>
+<style type="text/css">
+    * {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+    }
+
+    .clearfix:after {
+        content: ".";
+        display: block;
+        clear: both;
+        visibility: hidden;
+        line-height: 0;
+        height: 0;
+    }
+
+    .clearfix {
+        display: inline-block;
+    }
+
+    html[xmlns] .clearfix {
+        display: block;
+    }
+
+    * html .clearfix {
+        height: 1%;
+    }
+
+
+
+    #box {
+        width: 248px;
+        margin: 30px auto;
+    }
+
+    #box li {
+        width: 50px;
+        height: 20px;
+        line-height: 20px;
+        float: left;
+        text-align: center;
+        border: 1px solid #000;
+        margin: 0 5px 0 0;
+        cursor: pointer;
+    }
+
+    #box li.active {
+        border-bottom: 1px solid #fff;
+    }
+
+    #box p {
+        width: 246px;
+        border: 1px solid #000;
+        display: none;
+        margin-top: -12px;
+        line-height: 150px;
+        text-align: center;
+
+
+    }
+
+    #box p.active {
+        display: block;
+    }
+</style>
+
+<body>
+    <div id="box">
+        <ul class="clearfix">
+            <li class="activ">读书</li>
+            <li>电影</li>
+            <li>音乐</li>
+            <li>娱乐</li>
+        </ul>
+        <p class="active">读书01</p>
+        <p>电影02</p>
+        <p>音乐03</p>
+        <p>娱乐04</p>
+    </div>
+
+</body>
+
+</html>
+<script type="text/javascript">
+    // var oBox = document.getElementById('box');
+    // var oLis = oBox.getElementsByTagName('li');
+    // var oPs = oBox.getElementsByTagName('p');
+
+    /*方法一：
+    for(var i=0;i<oLis.length;i++){
+        oLis[i].index = i;
+        oLis[i].onmousemove = function(){
+            for(var i =0;i<oLis.length;i++){
+                oLis[i].className = oPs[i].className = '';
+            }
+            this.className = 'activ';
+            oPs[this.index].className='activ';
+        }
+    }
+    方法二：函数封装模式：
+    for(var i=0;i<oLis.length;i++){
+        oLis[i]['index'] = i;
+        oLis[i].onmousemove = function(){
+            chageeTab(this['index']);
+        }
+    }
+
+    function chageeTab (a){
+        for(var i = 0;i<oLis.length;i++){
+            oLis[i].className = '';
+            oPs[i].className = '';
+        }
+        oLis[a]['className'] = 'activ';
+        oPs[a]['className'] = 'activ';
+    }
+
+    方法三：闭包思路
+    for(var i=0;i<oLis.length;i++){
+       ~function(i){
+            oLis[i].onmousemove = function(){
+                chageeTab(i);
+            }
+       }(i)
+    }
+
+    function chageeTab (a){
+        for(var i = 0;i<oLis.length;i++){
+            oLis[i].className = '';
+            oPs[i].className = '';
+        }
+        oLis[a]['className'] = 'activ';
+        oPs[a]['className'] = 'activ';
+    }
+    方法四：闭包思路
+    for(var i=0;i<oLis.length;i++){
+        oLis[i].onmousemove = function(i){
+            return function(){
+                chageeTab(i);
+            }
+        }(i)
+    }
+
+    function chageeTab (a){
+        for(var i = 0;i<oLis.length;i++){
+            oLis[i].className = '';
+            oPs[i].className = '';
+        }
+        oLis[a]['className'] = 'activ';
+        oPs[a]['className'] = 'activ';
+    }*/
+
+    //第五种写法：
+    /*  var lastIndex = 0;
+      for(var i = 0; i < oLis.length; i++){
+          oLis[i].myIndex = i;
+          oLis[i].onmouseover = function(){
+               //判断点击的的次数跟设置的重复，则不用任何操作
+              if(this.myIndex === lastIndex)return;
+              oLis[lastIndex]['className'] = oPs[lastIndex]['className'] = '';
+              this.className = 'activ';
+              oPs[this.myIndex].className = 'activ';
+              console.log(this.myIndex)
+              lastIndex = this.myIndex;
+          }
+      }*/
+
+    //第六种写法：点什么元素，传递进来
+    // function tabChange(n){
+    //     for(var i= 0;i<oLis.length;i++){
+    //         console.log(i)
+    //         oLis[i].className = '';
+    //         oPs[i].className = '';
+    //         if(n===oLis[i]){
+    //             oLis[i].className = 'activ';
+    //             oPs[i].className = 'activ'
+    //         }
+    //     }
+    // }
+
+    // for(var i =0;i < oLis.length; i++){
+    //     oLis[i].onmouseover = function(){
+    //         tabChange(this);
+    //     }
+    // }
+
+    //第七种写法：闭包
+    var oBox = document.getElementById('box');
+    var oLis = oBox.getElementsByTagName('li');
+    var oPs = oBox.getElementsByTagName('p');
+
+    function chageTab(n) {
+        for (var i = 0; i < oLis.length; i++) {
+            oLis[i].className = oPs[i].className = '';
+        }
+        oLis[n]['className'] = oPs[n]['className'] = 'active';
+    }
+
+    (function () {
+        "use strict";
+        function tab(i) {
+            oLis[i].onmouseover = function () {
+                chageTab(i);
+            }
+        }
+
+        for (var i = 0; i < oLis.length; i++) {
+            tab(i);
+        }
+    })();
+
+</script>

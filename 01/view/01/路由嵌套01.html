@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>路由嵌套</title>
+</head>
+
+<body>
+<div id="app">
+    <router-link to="/home">首页</router-link>
+    <router-link to="/detail">详情页</router-link>
+    <router-view></router-view>
+</div>
+
+<template id="detail">
+    <div>
+        <router-link to="detail/aa">list1</router-link>
+        <router-link to="detail/bb">list2</router-link>
+        <router-view></router-view>
+    </div>
+</template>
+
+</body>
+
+</html>
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script src="../node_modules/vue-router/dist/vue-router.js"></script>
+<script type='text/javascript'>
+    let home = {template: '<div>home</div>'};
+    let detail = {template: '#detail'};
+
+    let aa = {template: '<h2>list1</h2>'};
+    let bb = {template: '<h2>list2</h2>'};
+    let routes =  [
+        {
+            path: '/home',
+            component: home
+        },
+        {
+            path: '/detail',
+            component: detail,
+            //=>子路由
+            children: [
+                //=>子路由的路径不用加/，带/表示一级路由
+                {
+                    path: 'aa',
+                    component: aa
+                }, {
+                    path: 'bb',
+                    component: bb
+                }
+            ]
+        }];
+    let router = new VueRouter({
+        routes
+    });
+
+    let vm = new Vue({
+        el: "#app",
+        router
+    });
+</script>

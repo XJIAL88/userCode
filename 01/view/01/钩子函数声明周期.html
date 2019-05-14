@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script type="text/javascript">
+    let vm = new Vue({ //=>根实例
+        beforeCreate() {}, //=>1、此方法用不到
+        data: {
+            a: 1
+        },
+        create() {}, //=>2、获取ajax，初始化操作
+        template: '<div>{{a}}</div>', //=> 4、如果有template属性会用模板替换掉外部html，只要有此属性app中的内容就没有意义了，只能有一个根元素，不能有文本节点
+        beforeMount() {}, //=>没有什么任何意义
+        mounted() {}, //=>5、真实dom渲染完了，可以操作dom
+        beforeUpdate() {}, //=>更新之前，一般用watch来替换掉
+        updated() {}, //=>更新后
+        beforeDestroy() {}, //=>销毁前（可以清除定时器或者清除事件绑定）
+        destroyed() {} //=>销毁后
+    });
+    vm.$mount("#app"); //=>3、要保证有编译的元素
+    vm.$destroy();//=>销毁vue实例
+</script>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>sync</title>
+</head>
+
+<body>
+<div id="app">
+
+    <h1>{{money}}</h1>
+    <!--<child :m="money" @change-more="change"></child>-->
+    <child :m.sync="money"></child>
+</div>
+<!--语法糖 .sync -->
+<!--子组件更新自己的属性，让绑定的父组件的数据同步修改-->
+
+<template id='temp'>
+    <div>
+        <h2>{{m}}</h2>
+        <button @click="getMore">获取更多</button>
+    </div>
+</template>
+</body>
+
+</html>
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script>
+    let child = {
+        template: '#temp',
+        props: ['m'],
+        methods: {
+            getMore() {
+                this.$emit('update:m', 1000);
+            }
+        }
+    };
+
+    let vm = new Vue({
+        el: "#app",
+        data: {
+            money: 100
+        },
+        components: {
+            child
+        }
+    })
+</script>

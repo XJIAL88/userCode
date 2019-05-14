@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style type=text/css>
+    .active{background: lightblue;}
+</style>
+<body>
+<!--vue 路由两种模式 默认使用hash模式-->
+<!--
+1.哈希值 # 开发使用
+2.history 直接将url变了，需要后台配合，上线的时候使用
+
+history:BOM 操作浏览器历史记录
+原型上方法：
+go(param) param param > 0 前进param页 param < 0 后退param页
+back() 回退一页  等价于go(-1)
+forward() 前进一页 等价于go(1);
+
+history.pushState(param01,param02,url);
+URL链接必须是同源
+pushState在记录中多加一条记录，并且url地址显示的是当前新加的记录（没有实现跳转）
+
+history.replaceState(param01,param02,url);
+直接替换了原有的链接（没有实现跳转）
+-->
+<div id="app">
+    <!-- 将router-link渲染成a标签；tag可以指定渲染标签-->
+    <router-link to='/home' tag='button'>首页</router-link>
+    <router-link to='/list'>列表</router-link>
+    <!--router-view路由对应的组件显示的位置-->
+    <router-view></router-view>
+</div>
+</body>
+</html>
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script src="../node_modules/vue-router/dist/vue-router.js"></script>
+<script type="text/javascript">
+    /** 路由组件
+     * 1.定义组件
+     * 2.路由映射表  路径 <=> 组件
+     * 3.创建VueRouter的实例
+     * 4.将路由映射表注入到VueRouter实例中
+     * 4.在Vue实例中注入 VueRouter实例
+     * 5.router-view路由对应的组件显示的位置
+     * */
+
+    //=>定义组件
+    let home = {template: "<h1>首页</h1>"},
+        list = {template: "<h1>列表</h1>"};
+    //=>路由映射表
+    let routes = [
+        {path: "/home", component: home},
+        {path: "/list", component: list}
+    ];
+    //=>创建VueRouter的实例
+    let router = new VueRouter({
+        routes, //=> 注入映射表
+        linkActiveClass:"active", //=>选中样式
+        mode:'history' //=>默认哈希模式
+    });
+
+    let vm = new Vue({
+        el: '#app',
+        data: {},
+        router //=>注入路由router; router:router (ES6语法，属性名属性值一样可以简写成router）
+    });
+</script>

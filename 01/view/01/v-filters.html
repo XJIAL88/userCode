@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <div>{{num|toFixed(2)}}</div>
+</div>
+
+</body>
+</html>
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script type="text/javascript">
+    const vm = new Vue({
+        el: '#app',
+        data: {
+            num: 12.3456765544
+        },
+        filters:{
+            toFixed(a,b){
+                return a.toFixed(b);
+            }
+        }
+    });
+</script>

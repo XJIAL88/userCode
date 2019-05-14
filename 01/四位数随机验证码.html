@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta content="IE=edge">
+    <title>四位数随机验证码</title>
+</head>
+<style type="text/css">
+a{
+    text-decoration: none;
+    color:red;
+}
+a:hover{
+    color:blue;
+}
+.box{
+    width: 270px;
+    margin:50px auto;
+}
+#codeBox{
+    width: 150px;
+    height: 50px;
+    line-height: 50px;
+    font-size: 24px;
+    border:1px solid #000;
+    text-align: center;
+    display:inline-block;
+
+
+}
+</style>
+<body>
+    <div class="box">
+        <div id="codeBox"> Ab4f</div> <a id="link" href="javascript:;">看不清，换一张</a>
+    </div>
+</body>
+</html>
+<script type="text/javascript">
+/*
+思路：
+    1.准备验证码获取的范围
+    2.我们只需要准备四个索引，即可在codeArea中通过charAt方法获取到四个字符，把四个字符串拼接成一个字符串就是我们的验证码
+
+*/
+var codeBoxs = document.getElementById('codeBox'),
+    link = document.getElementById('link');
+
+
+
+/*function queryCode(){
+var codeArea = '1234567890qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM';
+    var codeAreas = '';
+    for(var i = 0; i<4;i++){
+        codeAreas += codeArea.charAt(Math.round(Math.random()*61));
+    }
+    codeBoxs.innerText = codeAreas;
+}
+
+queryCode(); //页面加载或刷新的时候生成一个验证码添加到页面中
+
+//点击link需要重新生成一个验证码到盒子当中
+link.onclick = function(){
+    queryCode();
+}
+*/
+
+//==========以上方法优化代码==========
+
+/*var codeBoxs = document.getElementById('codeBox'),
+    link = document.getElementById('link');
+
+function queryCode(){
+var codeArea = '1234567890qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM';
+    var result = '';
+    for(var i = 0; i < 4;i++){
+        var n = codeArea.charAt(Math.round(Math.random()*61));
+        if(result.indexOf(n) > -1){ //当前本次循环找到的字符，这个字符不一定是我们想要的，如果已经在result中存在了，则不要这个字符重新找
+           i--;
+           continue;
+        }
+        result += n;
+    }
+    return result; //把结果以数据返回给queryCode
+}
+
+codeBoxs.innerText = queryCode(); //页面加载或刷新的时候生成一个验证码添加到页面中
+
+//点击link需要重新生成一个验证码到盒子当中
+link.onclick = function(){
+    codeBoxs.innerText = queryCode();
+}*/
+
+//==========while循环改写==========
+
+var codeBoxs = document.getElementById('codeBox'),
+    link = document.getElementById('link');
+
+function queryCode(){
+var codeArea = '1234567890qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM';
+    var result = '';
+
+    //条件：容器中的长度为4，只要不满足条件就继续循环
+    while(result.length < 4){
+        var n = codeArea.charAt(Math.round(Math.random()*61));
+
+        //判断容器中没有出现过的字符才加进容器中
+        if(result.indexOf(n)===-1){
+            result += n;
+        }
+    }
+
+    return result; //把结果以数据返回给queryCode
+}
+
+codeBoxs.innerText = queryCode(); //页面加载或刷新的时候生成一个验证码添加到页面中
+
+//点击link需要重新生成一个验证码到盒子当中
+link.onclick = function(){
+    codeBoxs.innerText = queryCode();
+}
+
+
+
+
+
+
+
+
+
+
+
+</script>

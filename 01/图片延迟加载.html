@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ch">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="section">
+        <!-- 
+        img是放到一个盒子中
+        src是空
+        data-src存放真实图片地址
+        -->
+        <img src="" data-src='img/banner.jpg' alt="">
+    </div>
+</body>
+
+</html>
+<script>
+    /*当页面加载完成（结构、数据、DOM等都加载完成）*/
+    //window.onload = function(){};
+
+    /*也可以设置一个定时器，间隔多长时间后在加载真实图片（定时器是异步的，所以定时器能执行也代表页面加载完成）*/
+    //setTimeout(function() {}, 1000);
+
+    let imgBox = document.getElementById('section'),
+        pageImg = imgBox.getElementsByTagName('img');
+
+    setTimeout(function() {
+        let trueImg = pageImg.getAttribute('data-src');
+        //=>这样做不好：如果图片不存在，在部分浏览器中个，页面中的img部分显示的时候是一个叉叉（我们最好在赋值给页面的src属性的时候，先验证一下图片是否存在，存在我们在赋值）
+        // pageImg.src = trueImg;
+        // pageImg.style.display = 'block';
+
+        //=>创建一个临时的img来验证
+        //let tempImg = document.createElement('img');
+
+        //=>这也是创建临时img，只有img标签才能这么创建
+        let tempImg = new image();
+        //tempImg.src = trueImg;
+        tempImg.onload = function() {
+            //=>图片加载成功触发这个事件
+            pageImg.src = trueImg;
+            pageImg.style.display = 'block';
+            tempImg = null;
+        }
+        tempImg.src = trueImg;  //=>在部分IE浏览器中只有src赋值放到onload下才能起作用
+
+    }, 1000);
+</script>

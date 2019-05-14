@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+    let A = function() {
+        return new Promise(resolve => {
+            setTimeout(() => {
+                resolve();
+            }, 1000);
+        })
+    }
+    let B = function() {
+        return new Promise(resolve => {
+            setTimeout(() => {
+                resolve();
+            }, 1000);
+        })
+    }
+
+    let promise = A();
+    promise.then(() => {
+        console.log(1); //=>如果方法中返回的一个具体指，而且执行中没有错误异常，会立即执行下一个then中的方法（不写retuern也是返回了具体值：undefined），但是如果返回的是一个Promise实例（并且管控了一个异步操作），只能等Promise完成，把成功后的结果当做具体的值返回，才能进入下一个函数执行
+        return B();
+    }).then(() => {
+        console.log(2);
+    });
+</script>

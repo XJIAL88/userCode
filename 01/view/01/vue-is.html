@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <input type="radio" v-model="sel" value="com01">com01
+        <input type="radio" v-model="sel" value="com02">com02
+        <!-- component is="这里是什么组件就显示什么组件" -->
+        <!--component 只能放一个组件 组件之间切换的时候就是销毁之前的组件 重建新的组件会比较浪费性能 -->
+        <component :is='sel'></component>
+
+        <!--keep-alive 这样组件不会被销毁，只是缓存起来 -->
+        <keep-alive>
+            <component :is='sel'></component>
+        </keep-alive>
+    </div>
+</body>
+
+</html>
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script>
+    let com01 = {
+        template: '<h1>com01</h1>',
+    };
+    let com02 = {
+        template: '<h1>com02</h1>',
+    };
+
+    let vm = new Vue({
+        el: "#app",
+        data: {
+            sel: ''
+        },
+        components: {
+            com01,
+            com02
+        }
+    })
+</script>

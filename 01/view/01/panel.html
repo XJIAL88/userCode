@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+    <title>Document</title>
+</head>
+<body>
+<div id="app" class='container'>
+    <div class="row">
+        <div class="col-sm-8 col-md-6 col-lg-4 col-sm-offset-2 col-md-offset-4 col-lg-offset-4">
+            <!--注意传进来的是字符串-->
+            <panel :type="'primary'"  @say-song="saySong">
+                <h3 ref='title' slot='title'>我们不一样</h3>
+                <div slot="content">
+                    <p>我们不一样</p>
+                    <p>每个人都有不同的境遇</p>
+                    <p>我们在这里</p>
+                    <p>在这里等你</p>
+                    <p>我们不一样</p>
+                    <p>虽然会经历不同的事情</p>
+                    <p>我们都希望</p>
+                    <p>来生还能相遇</p>
+                </div>
+                <div slot="author">
+                    <p>词曲：高进</p>
+                    <p>演唱：大壮</p>
+                </div>
+            </panel>
+        </div>
+    </div>
+</div>
+<template id='panel'>
+    <div :class="['panel', 'panel-'+type]">
+        <div class="panel-heading">
+            <slot name="title"></slot>
+        </div>
+        <div :class="['panel-body', 'text-'+type]">
+            <!--<div>歌词</div>-->
+            <!-- 插槽-->
+            <slot name="content"></slot>
+        </div>
+        <div class="panel-footer">
+            <slot name="author">
+                <p>匿名</p>
+            </slot>
+            <button :class="['btn','btn-'+type]" @click="show">点击弹出歌名</button>
+        </div>
+    </div>
+</template>
+</body>
+</html>
+<script type='text/javascript'>
+    const panel = {
+        template: '#panel',
+        props: {
+            type: {
+                type: String, //=>数据类型
+                default: 'default'
+            }
+        },
+        methods: {
+            show(){
+                this.$emit('say-song');
+            }
+        }
+    };
+    const vm = new Vue({
+        el: '#app',
+        components: {panel},
+        methods: {
+            saySong() {
+                alert(this.$refs.title.innerText);
+            }
+        }
+    });
+</script>

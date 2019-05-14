@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>编程式导航</title>
+</head>
+<body>
+<div id="app">
+    <router-view></router-view>
+</div>
+
+<template id='home'>
+    <div>
+        <h1>home</h1>
+        <button @click="goList">跳转到list</button>
+    </div>
+</template>
+<template id="list">
+    <div>
+        <h1>list</h1>
+    </div>
+</template>
+</body>
+</html>
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script src="../node_modules/vue-router/dist/vue-router.js"></script>
+<script type='text/javascript'>
+    let home = {
+            template: "#home",
+            methods: {
+                goList() {
+                    // this.$router.push("/list"); //=>有回退按钮
+                    this.$router.replace("/list"); //=>无按钮，直接替换
+                }
+            }
+        },
+        list = {template: "#list"};
+    //=>组件都有两个属性$router(放的函数） $route（属性）
+    //=>router:go/back/forward/push/replace
+    let routes = [
+        {path: '/', component: home},//=>首次打开，默认路径是/
+        {path: '/home', component: home},
+        {path: '/list', component: list},
+        {path: '/*', redirect: '/home'} //=>从上到下依次匹配，都没有匹配到访问最后一个，*放在最后，让其重定向（redirect）
+    ];
+
+    let router = new VueRouter({
+        routes
+    });
+
+    let vm = new Vue({
+        el: '#app',
+        data: {},
+        components: {
+            home,
+            list
+        },
+        router
+    });
+</script>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <box>
+            <h1 slot="a">A</h1>
+            <h1 slot="b">B</h1>
+            <h1 slot="c">C</h1>
+            <h1 slot="d">D</h1>
+            <!-- 没有name属性匹配到默认属性-->
+            <h1>哈哈</h1>
+        </box>
+    </div>
+    <!-- 组件中的标签给他加一个属性 slot="起的名字" -->
+    <!-- 组件中定义的模板的slot 对应有name属性 将对应的名字的标签放进去 -->
+    <template id="temp">
+        <div>
+            01:
+            <slot name="b"></slot>  
+            02:
+            <slot name="d"></slot>  
+            03:
+            <slot name="a"></slot>  
+            04:
+            <slot name="c"></slot>  
+            <!-- default 这里放的是没有solt属性标签 可以省略default 可以写成：<slot></slot> -->
+            <slot name="default"></slot>
+            <slot name="xx"><h2>没匹配到显示内容显示slot内容</h2></slot>
+
+        </div>
+    </template>
+</body>
+
+</html>
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script>
+    let box = {
+        template: "#temp",
+
+    };
+    let vm = new Vue({
+        el: "#app",
+        components: {
+            box
+        }
+    });
+</script>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style type="text/css">
+    #app>div {
+        width: 50px;
+        height: 50px;
+        border: 1px dashed #ccc;
+    }
+</style>
+
+<body>
+    <div id="app">
+        <div v-color="flag"></div>
+    </div>
+</body>
+
+</html>
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script type="text/javascript">
+    const vm = new Vue({
+        el: '#app',
+        data: {
+            flag: 'red'
+        },
+        directives: {
+            //=>定义指令的时候不需要加v-，使用的时候加上v-
+            color(el, bindings) {
+                //=>只要使用指令，就会触发color函数
+                console.log(arguments)
+                el.style.background = bindings.value;
+            }
+        }
+    });
+</script>

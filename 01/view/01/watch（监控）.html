@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <input type="text" v-model="val">
+    {{obj.name}}
+</div>
+</body>
+</html>
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script type='text/javascript'>
+    const vm = new Vue({
+        el: '#app',
+        data: {
+            val: 'hello',
+            obj: {name: 'hello world'}
+        },
+        //=>监控属性是data中的属性
+        watch: {
+            // //=>val是被监控的属性，写成一个函数的形式，只要被监控属性发生改变就会触发这个函数（默认第一次不执行）
+            // val(newVal, oldVal){
+            //     //=>每一次执行默认传两个参数 新值和旧值
+            //     console.log(newVal, oldVal);
+            // }
+
+            //=>如果想让函数上来先执行一次，写成对象形式，并且加immediate:true
+            val: {
+                handler(newVal, oldVal) {
+                    console.log(newVal, oldVal);
+                },
+                //=>第一次执行以下，只传一个参数，就是当前值
+                immediate: true
+            },
+            //=>默认监控对象的时候，里面的属性发生改变是监控不到的，因为监控的是对象的地址值，如果想监控属性的改变加一个属性 deep:true （深度监控）
+            //=>但是要注意， handler传的新值和旧值 内存里面都是改变后的值
+            obj: {
+                handler(newVal, oldVal) {
+                    console.log(newVal, oldVal);
+                },
+                deep: true
+            }
+        }
+    });
+
+    //    操作地址
+
+    obj = {name: 'hello'};
+    console.log(obj);
+    obj.name = "js";
+</script>

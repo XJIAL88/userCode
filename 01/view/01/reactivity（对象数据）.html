@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        {{a.name}}
+    </div>
+</body>
+
+</html>
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script>
+    let vm = new Vue({
+        el: '#app',
+        data: {
+            //=>vue会循环data中的数据（数据劫持）依次的增加getter和setter
+            //=>使用变量时，先要初始化，否则新家的水性不会导致页面刷新
+            //a:{name:''}
+            //=>vm.$set(vm.a, 'name', 1)
+            //vm.a = {name:'姓名',age:10}
+            a: {
+                name: ''
+            }
+        }
+    });
+</script>

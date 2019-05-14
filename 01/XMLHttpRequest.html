@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="cn">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script type="text/javascript">
+    let xhr = new XMLHttpRequest();
+    xhr.open('get', 'http://127.0.0.1:8000//getMatchList?limit=10&page=1');
+    xhr.onreadystatechange = () => {
+        if (!xhr.readyState === 4 && xhr.status === 200) return;
+        console.log(xhr.responseText);
+    };
+    xhr.send(null);
+</script>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <button @click="hide">点你</button>
+        <!--给组件加ref属性-->
+        <child ref="child"></child>
+    </div>
+
+    <template id="temp">
+        <div>
+            <h1 v-show="flg">我是子组件</h1>
+            <h2 ref="h2">哈哈</h2>
+        </div>
+    </template>
+</body>
+
+</html>
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script>
+    let child = {
+        template: "#temp",
+        data() {
+            return {
+                flg: true
+            }
+        },
+        methods: {
+            hide() {
+                this.flg = false
+            }
+        }
+
+    };
+    let vm = new Vue({
+        el: "#app",
+        components: {
+            child
+        },
+        methods: {
+            hide() {
+                this.flg = false;
+                //=>在这里拿到子组件的方法执行
+                console.log(this.$refs);
+                console.log(this.$refs.child); //=>组件child
+                this.$refs.child.hide(); //=>执行子组件中的hide()方法；
+                this.$refs.child.$refs.h2; //=>子组件中的h2标签
+                this.$refs.child.$refs.h2.style.color = 'yellow';
+            }
+        }
+    });
+</script>

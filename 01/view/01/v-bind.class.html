@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    .x {
+        background: lightgoldenrodyellow
+    }
+    
+    .y {
+        font-size: 30px;
+    }
+    
+    .z {
+        color: pink
+    }
+    
+    .a {
+        width: 100px;
+        height: 100px;
+        background: lavender;
+    }
+</style>
+
+<body>
+    <div id="app">
+        <!-- :class绑定的样式和class绑定的不冲突 -->
+        <!-- 1、对象方式：{className:isActive} -->
+        <div class='x y' :class='{z:flag,y:true}'>你好</div>
+        <div class="z" :class='[class1,class2]'>你好</div>
+        <!-- 2、数字0转换为true -->
+        <div v-for='(item,index) in arr' :class={x:index%2}> {{item}}</div>
+        <!--如果绑定的是数组，数组每一项作为className 也可以通过索引取出来-->
+        <div :class="['box1','box2','box3']"></div>
+        <div :class="['box1','box2','box3'][0]"></div>
+
+
+        <input type="text" v-model="val" @keyup.enter="cur=val">
+        <div v-for="a in arr" :class="{z:cur==a}">{{a}}</div>
+
+    </div>
+</body>
+
+</html>
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script>
+    //class="abc" style='background:color'
+    //=>常用绑定方法：第一种方式是对象 第二种方式是数组
+    let vm = new Vue({
+        el: '#app',
+        data: {
+            flag: true,
+            class1: 'a',
+            class2: 'z',
+            val:'',
+            cur:'',
+            arr: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+        }
+    });
+</script>

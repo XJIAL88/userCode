@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+</html>
+<script type='text/javascript'>
+    let fn = function () {
+
+    };
+    console.log(fn.name);
+
+    //=> 特殊的name
+    //=> 1.通过构造函数方式创建第一个函数 name都是anonymous。
+    //=> 传1个参数是函数体，放在字符串中,
+    //=> 传2个参数，第一个是形参，第二个是函数体
+    let f = new Function('var a =1;a++;console.log(a);');
+    console.log(f.name); //=>name都是anonymous
+    console.log(f()); //=>2
+    let ff = new Function('a,b', 'var a =1;a++;console.log(a);');
+
+    let a = '[1,2,3,4]';
+    new Function('return + [1,2,3,4]');
+    console.log((new Function("return" + a))());
+
+    //=> 2.通过bind方法得到的函数name是 “bound 原函数名字”
+    let f2 = fn.bind(null);
+    console.log(f2.name); //=>bound fn
+
+
+</script>

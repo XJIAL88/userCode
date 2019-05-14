@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>todo</title>
+</head>
+<style>
+    input {
+        outline: none;
+    }
+</style>
+
+<body>
+    <div id="app">
+        <!-- modifiers（.Enter） 键盘码修饰符 -->
+        <input type="text" v-model='val' @keyup.Enter='add'>
+        <ul>
+            <li v-for='(item,index) in arr'>{{item}}<button @click='remove(item,index)'> <i></i> 删除</button></li>
+        </ul>
+    </div>
+</body>
+
+</html>
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script>
+    let vm = new Vue({
+        el: '#app',
+        methods: {
+            add(e) {
+                this.arr.unshift(this.val);
+                this.val = '';
+            },
+            remove(item, index) {
+                this.arr = this.arr.filter((cur, i) => {
+                    return index !== i;
+                });
+            }
+        },
+        data: {
+            arr: [],
+            val: ''
+        }
+    });
+</script>
